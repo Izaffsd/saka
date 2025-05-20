@@ -30,38 +30,58 @@ if (!$userdata) {
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css"/>
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css"/>
-    <title>HOME</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous"/>
+    <title>SAKA - Dashboard Pengguna</title>
 
     <style>
+        :root {
+            --primary-color: #3366CC;
+            --secondary-color: #1E3A8A;
+            --accent-color: #FFB347;
+            --danger-color: #FF5A5A;
+            --light-bg: #f0f4f8;
+            --text-dark: #2d3748;
+            --text-light: #ffffff;
+            --divider-color: #e2e8f0;
+            --success-color: #38A169;
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-bg);
+            margin: 0;
+            padding: 0;
+            color: var(--text-dark);
         }
 
-        h4 {
-            color: black;
-            margin-top: 10px;
-            font-size: 18px;
-            font-family: 'Arial';
-        }
-
+        /* Navbar styling */
         .navbar {
-            background-color: #C4D7FF;
-            padding: 10px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 0.75rem 1.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #ddd;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
         .navbar-brand {
             display: flex;
             align-items: center;
             text-decoration: none;
-            color: #333;
+            color: var(--text-light);
         }
 
         .navbar-brand img {
-            margin-right: 10px;
+            margin-right: 15px;
+            border-radius: 8px;
+        }
+
+        .navbar-brand h4 {
+            color: var(--text-light);
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: 600;
         }
 
         .navbar ul {
@@ -69,80 +89,384 @@ if (!$userdata) {
             padding: 0;
             margin: 0;
             display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
-        .navbar ul li {
-            margin-right: 20px;
-        }
-
-        .navbar ul li a {
+        .nav-btn {
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
             text-decoration: none;
-            color: #333;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
 
-        .navbar ul li a:hover {
-            color: white;
+        .nav-btn-primary {
+            background-color: rgba(255, 255, 255, 0.15);
+            color: var(--text-light);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
-        .container-md {
+        .nav-btn-primary:hover {
+            background-color: rgba(255, 255, 255, 0.25);
+            color: var(--text-light);
+        }
+
+        .nav-btn-danger {
+            background-color: rgba(255, 90, 90, 0.15);
+            color: var(--text-light);
+            border: 1px solid rgba(255, 90, 90, 0.3);
+        }
+
+        .nav-btn-danger:hover {
+            background-color: var(--danger-color);
+            color: var(--text-light);
+        }
+
+        /* User profile display */
+        .user-profile {
+            display: flex;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 5px 12px;
+            border-radius: 50px;
+            margin-right: 15px;
+        }
+
+        .user-profile .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-dark);
+            font-weight: 600;
+            margin-right: 8px;
+            font-size: 0.8rem;
+        }
+
+        .user-profile .name {
+            color: var(--text-light);
+            font-size: 0.85rem;
+            max-width: 150px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Main content */
+        .container-dashboard {
             max-width: 95%;
-            margin: 40px auto;
-            background-color: #EEEEEE;
-            padding: 20px;
-            box-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+            margin: 30px auto;
+            background-color: #ffffff;
+            padding: 25px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            border-radius: 10px;
         }
 
-        h2 {
+        .page-title {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            color: var(--secondary-color);
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 12px;
+            font-size: 1.8rem;
         }
 
-        .table thead th {
-            background-color: #C4D7FF;
-            border: 1px solid #0B192C;
-            padding: 10px;
+        .page-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+
+        .user-email {
             text-align: center;
+            color: var(--text-dark);
+            margin-top: -15px;
+            margin-bottom: 25px;
+            font-size: 1rem;
+            opacity: 0.8;
         }
 
-        .table tbody td {
-            background-color: #EEEEEE;
-            border: 1px solid #0B192C;
-            padding: 10px;
+        /* Table styling */
+        .table-container {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(0,0,0,0.05);
+        }
+
+        .custom-table {
+            width: 100%;
+            margin-bottom: 0;
+            border-collapse: collapse;
+        }
+
+        .custom-table thead th {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: var(--text-light);
+            padding: 12px 15px;
+            border: none;
+            font-weight: 600;
+            text-align: center;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            vertical-align: middle;
+        }
+
+        .custom-table tbody td {
+            background-color: #ffffff;
+            border: 1px solid var(--divider-color);
+            padding: 12px 15px;
             text-align: left;
-            max-width: 200px; /* Set maximum width for cells */
+            vertical-align: middle;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+        }
+
+        .custom-table tbody tr:hover td {
+            background-color: rgba(240, 244, 248, 0.7);
+        }
+
+        /* Expandable cell styles */
+        .expandable-cell {
+            position: relative;
+            cursor: pointer;
+            max-width: 200px;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
         }
         
-        /* Add class for expandable content */
-        .expandable-cell {
-            position: relative;
-            cursor: pointer;
+        .expandable-cell:hover {
+            color: var(--primary-color);
         }
         
         .expandable-cell .full-content {
             display: none;
             position: absolute;
-            background: #fff;
-            border: 1px solid #0B192C;
-            padding: 10px;
+            left: 0;
+            top: 100%;
+            background: #ffffff;
+            border: 1px solid var(--divider-color);
+            padding: 15px;
             z-index: 100;
-            width: 300px;
+            width: 350px;
             white-space: normal;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border-radius: 6px;
+            font-size: 0.9rem;
+            line-height: 1.5;
         }
         
         .expandable-cell:hover .full-content {
             display: block;
         }
 
+        /* Status badges */
+        .badge {
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 0.8rem;
+            text-align: center;
+            display: inline-block;
+            min-width: 80px;
+        }
+
+        .badge-pending {
+            background-color: rgba(255, 179, 71, 0.15);
+            color: #B45309;
+        }
+
+        .badge-approved {
+            background-color: rgba(56, 161, 105, 0.15);
+            color: #276749;
+        }
+
+        .badge-rejected {
+            background-color: rgba(255, 90, 90, 0.15);
+            color: #C53030;
+        }
+
+        /* DataTables custom styling */
+        .dataTables_wrapper .dataTables_length,
+        .dataTables_wrapper .dataTables_filter {
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+
+        .dataTables_wrapper .dataTables_length select,
+        .dataTables_wrapper .dataTables_filter input {
+            border: 1px solid var(--divider-color);
+            border-radius: 6px;
+            padding: 5px 10px;
+            color: var(--text-dark);
+        }
+
+        .dataTables_wrapper .dataTables_filter input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(51, 102, 204, 0.15);
+        }
+
+        .dataTables_wrapper .dataTables_info,
+        .dataTables_wrapper .dataTables_paginate {
+            margin-top: 20px;
+            color: var(--text-dark);
+        }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button {
+            border-radius: 4px;
+            border: 1px solid var(--divider-color);
+        }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+            background: var(--primary-color) !important;
+            border-color: var(--primary-color) !important;
+            color: #ffffff !important;
+        }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+            background: rgba(51, 102, 204, 0.1) !important;
+            border-color: var(--primary-color) !important;
+            color: var(--primary-color) !important;
+        }
+
+        /* Stats/Info cards at the top */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            display: flex;
+            align-items: center;
+            border-left: 4px solid var(--primary-color);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .stat-card .icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-right: 15px;
+            color: #ffffff;
+        }
+
+        .stat-card:nth-child(1) .icon {
+            background-color: var(--primary-color);
+        }
+
+        .stat-card:nth-child(2) .icon {
+            background-color: var(--accent-color);
+        }
+
+        .stat-card:nth-child(3) .icon {
+            background-color: var(--success-color);
+        }
+
+        .stat-card .stat-content {
+            flex: 1;
+        }
+
+        .stat-card .stat-title {
+            color: #718096;
+            font-size: 0.85rem;
+            margin-bottom: 5px;
+        }
+
+        .stat-card .stat-value {
+            color: var(--text-dark);
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        /* Add button styling */
+        .action-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin-bottom: 25px;
+        }
+
+        .action-button:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
         .footer {
-            background-color: #C4D7FF;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--text-light);
             padding: 20px;
             text-align: center;
-            border-top: 1px solid #ddd;
-            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 10px;
+            }
+            
+            .navbar-brand {
+                margin-bottom: 10px;
+            }
+            
+            .navbar ul {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .user-profile {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+            
+            .container-dashboard {
+                padding: 15px;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -150,78 +474,151 @@ if (!$userdata) {
 <!-- Navbar -->
 <div class="navbar">
     <a class="navbar-brand" href="#">
-        <img src="img/305199717_985453492342369_1200662185772088661_n.png" height="50" alt="Sistem Aduan Kerosakan Aset" />
-        <h4><b>SISTEM ADUAN KEROSAKAN ASET</b></h4>
+        <img src="img/305199717_985453492342369_1200662185772088661_n.png" height="40" alt="Sistem Aduan Kerosakan Aset" />
+        <h4><b>SISTEM ADUAN KEROSAKAN ASET (SAKA)</b></h4>
     </a>
     <ul>
-        <li><a href="aduan_user.php" class="btn btn-outline-dark">Mohon Aduan Aset</a></li>
-        <li><a href="index.php" class="btn btn-outline-danger">Log Keluar</a></li>
+        <div class="user-profile">
+            <div class="avatar">
+                <?php echo substr($userdata['nama'] ?? 'User', 0, 1); ?>
+            </div>
+            <div class="name">
+                <?php echo $userdata['nama'] ?? 'User'; ?>
+            </div>
+        </div>
+        <li><a href="aduan_user.php" class="nav-btn nav-btn-primary"><i class="fas fa-plus-circle"></i> Mohon Aduan Aset</a></li>
+        <li><a href="index.php" class="nav-btn nav-btn-danger"><i class="fas fa-sign-out-alt"></i> Log Keluar</a></li>
     </ul>
 </div>
 
 <!-- Main content -->
-<section class="vh-100">
-    <div class="container-md">
+<div class="container-dashboard">
+    <!-- Stats cards row -->
+    <div class="stats-container">
+        <?php
+        // Count total complaints
+        $total_query = "SELECT COUNT(*) as total FROM `tbl_semakan` WHERE emel = '".$userdata['emel']."'";
+        $total_result = mysqli_query($conn, $total_query);
+        $total_data = mysqli_fetch_assoc($total_result);
+        $total_complaints = $total_data['total'];
         
-        <h2><b>Senarai Aduan Kerosakan Aset</b><br><?php echo($userdata['emel']); ?></h2>
-
-        <div class="table-responsive">
-            <table id="aduanTable" class="table table-bordered display nowrap" style="width:100%">
-                <thead>
-                    <tr>
-                        <th>Bil.</th>
-                        <th>Kategori</th>
-                        <th>Tarikh Kerosakan</th>
-                        <th>Nama Dan Jawatan</th>
-                        <th>Jenis Aset</th>
-                        <th>No. Siri Aset</th>
-                        <th>Tempat Rosak</th>
-                        <th>Pengguna Terakhir</th>
-                        <th>Perihal Kerosakan</th>
-                        <th>Disahkan</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <?php
-                // Filter by the current user's ID or IC number
-                $sql = "SELECT * FROM `tbl_semakan` WHERE emel = '".$userdata['emel']."'";
-                $result = mysqli_query($conn, $sql);
-                if ($result && $result->num_rows > 0) {
-                    $count = 1;
-                    while ($data = $result->fetch_assoc()) {
-                ?>
-                    <tr>
-                        <td><?php echo $count++; ?></td>
-                        <td><?php echo ($data['role']); ?></td>
-                        <td><?php echo ($data['tarikh_rosak']); ?></td>
-                        <td><?php echo ($data['nama']); ?></td>
-                        <td><?php echo ($data['jenis_aset']); ?></td>
-                        <td><?php echo ($data['no_siri']); ?></td>
-                        <td><?php echo ($data['tempat_rosak']); ?></td>
-                        <td><?php echo ($data['userterakhir']); ?></td>
-                        <td class="expandable-cell">
-                            <?php 
-                                // Limit text to 30 characters
-                                echo substr($data['ulasan'], 0, 500) . (strlen($data['ulasan']) > 500 ? '...' : ''); 
-                            ?>
-                        </td>
-                        <td><?php echo ($data['lulus_jabatan']); ?></td>
-                    </tr>
-                <?php
-                    }
-                } else {
-                    echo "<tr><td colspan='10' class='text-center'>Tiada data ditemui.</td></tr>";
-                }
-                ?>
-                </tbody>
-            </table>
+        // Count pending complaints
+        $pending_query = "SELECT COUNT(*) as pending FROM `tbl_semakan` WHERE emel = '".$userdata['emel']."' AND lulus_jabatan = 'Belum Disahkan'";
+        $pending_result = mysqli_query($conn, $pending_query);
+        $pending_data = mysqli_fetch_assoc($pending_result);
+        $pending_complaints = $pending_data['pending'];
+        
+        // Count approved complaints
+        $approved_query = "SELECT COUNT(*) as approved FROM `tbl_semakan` WHERE emel = '".$userdata['emel']."' AND lulus_jabatan = 'Disahkan'";
+        $approved_result = mysqli_query($conn, $approved_query);
+        $approved_data = mysqli_fetch_assoc($approved_result);
+        $approved_complaints = $approved_data['approved'];
+        ?>
+        <div class="stat-card">
+            <div class="icon">
+                <i class="fas fa-file-alt"></i>
+            </div>
+            <div class="stat-content">
+                <div class="stat-title">Jumlah Aduan</div>
+                <div class="stat-value"><?php echo $total_complaints; ?></div>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="icon">
+                <i class="fas fa-clock"></i>
+            </div>
+            <div class="stat-content">
+                <div class="stat-title">Belum Disahkan</div>
+                <div class="stat-value"><?php echo $pending_complaints; ?></div>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="stat-content">
+                <div class="stat-title">Disahkan</div>
+                <div class="stat-value"><?php echo $approved_complaints; ?></div>
+            </div>
         </div>
     </div>
-</section>
+
+    <h2 class="page-title">Senarai Aduan Kerosakan Aset</h2>
+    <div class="user-email"><?php echo($userdata['emel']); ?></div>
+    
+    <a href="aduan_user.php" class="action-button">
+        <i class="fas fa-plus-circle"></i> Tambah Aduan Baru
+    </a>
+
+    <div class="table-container">
+        <table id="aduanTable" class="custom-table table-bordered display nowrap" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Bil.</th>
+                    <th>Kategori</th>
+                    <th>Tarikh Kerosakan</th>
+                    <th>Nama</th>
+                    <th>Jenis Aset</th>
+                    <th>No. Siri Aset</th>
+                    <th>Tempat Rosak</th>
+                    <th>Pengguna Terakhir</th>
+                    <th>Perihal Kerosakan</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php
+            // Filter by the current user's ID or IC number
+            $sql = "SELECT * FROM `tbl_semakan` WHERE emel = '".$userdata['emel']."' ORDER BY tarikh_rosak DESC";
+            $result = mysqli_query($conn, $sql);
+            if ($result && $result->num_rows > 0) {
+                $count = 1;
+                while ($data = $result->fetch_assoc()) {
+            ?>
+                <tr>
+                    <td class="text-center"><?php echo $count++; ?></td>
+                    <td><?php echo htmlspecialchars($data['role']); ?></td>
+                    <td><?php echo htmlspecialchars($data['tarikh_rosak']); ?></td>
+                    <td><?php echo htmlspecialchars($data['nama']); ?></td>
+                    <td><?php echo htmlspecialchars($data['jenis_aset']); ?></td>
+                    <td><?php echo htmlspecialchars($data['no_siri']); ?></td>
+                    <td><?php echo htmlspecialchars($data['tempat_rosak']); ?></td>
+                    <td><?php echo htmlspecialchars($data['userterakhir']); ?></td>
+                    <td class="expandable-cell">
+                        <?php echo htmlspecialchars(substr($data['ulasan'], 0, 50) . (strlen($data['ulasan']) > 50 ? '...' : '')); ?>
+                        <?php if(strlen($data['ulasan']) > 50): ?>
+                        <div class="full-content">
+                            <?php echo nl2br(htmlspecialchars($data['ulasan'])); ?>
+                        </div>
+                        <?php endif; ?>
+                    </td>
+                    <td class="text-center">
+                        <?php if($data['lulus_jabatan'] == 'Disahkan'): ?>
+                            <span class="badge badge-approved">Disahkan</span>
+                        <?php elseif($data['lulus_jabatan'] == 'Ditolak'): ?>
+                            <span class="badge badge-rejected">Ditolak</span>
+                        <?php else: ?>
+                            <span class="badge badge-pending">Belum Disahkan</span>
+                        <?php endif; ?>
+                    </td>
+                </tr>
+            <?php
+                }
+            } else {
+                echo "<tr><td colspan='10' class='text-center'>Tiada data ditemui.</td></tr>";
+            }
+            ?>
+            </tbody>
+        </table>
+    </div>
+</div>
 
 <!-- Footer -->
 <footer class="footer">
-    <div class="text-center p-3">ILP Kuala Langat Selangor &copy; 2024 Sistem Kerosakan Aset. All rights reserved.</div>
+    <div class="text-center p-3">
+        <div class="mb-2">ILP Kuala Langat Selangor</div>
+        <div>&copy; 2024 Sistem Aduan Kerosakan Aset (SAKA). Hak Cipta Terpelihara.</div>
+    </div>
 </footer>
 
 <!-- Scripts -->
@@ -240,13 +637,18 @@ if (!$userdata) {
             language: {
                 search: "Carian:",
                 lengthMenu: "Papar _MENU_ rekod",
+                info: "Memaparkan _START_ hingga _END_ daripada _TOTAL_ rekod",
+                infoEmpty: "Tiada rekod",
+                emptyTable: "Tiada data dalam jadual",
+                zeroRecords: "Tiada padanan rekod yang dijumpai",
                 paginate: {
                     first: "Pertama",
                     last: "Terakhir",
                     next: "Seterusnya",
                     previous: "Sebelumnya"
                 }
-            }
+            },
+            order: [[2, 'desc']] // Order by date column descending
         });
     });
 </script>
