@@ -1,3 +1,5 @@
+<?php include('header_print.php');?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -284,15 +286,17 @@
         <div class="container-custom">
             <h2 class="page-heading">Senarai Aduan Kerosakan Aset</h2>
             
+           
+
             <div class="table-header">
                 <div class="search-filter">
                     <!-- Search and filter components could go here -->
                 </div>
                 <div class="action-buttons">
-                    <button onclick="exportToWord()" class="btn btn-custom btn-export-word">
+                    <button onclick="exportToWord()" class="btn-export btn-word">
                         <i class="fas fa-file-word"></i> Export Word
                     </button>
-                    <button onclick="exportToExcel()" class="btn btn-custom btn-export-excel">
+                    <button onclick="exportToExcel()" class="btn-export btn-excel">
                         <i class="fas fa-file-excel"></i> Export Excel
                     </button>
                 </div>
@@ -383,16 +387,8 @@
             });
         });
 
-        // Export functions
-        function exportToWord() {
-            alert('Muat turun dokumen Word sedang diproses...');
-            // Implement actual Word export functionality here
-        }
-
-        function exportToExcel() {
-            alert('Muat turun fail Excel sedang diproses...');
-            // Implement actual Excel export functionality here
-        }
+         
+         
     </script>
 </body>
 </html>
