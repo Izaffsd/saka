@@ -486,7 +486,6 @@ if (!$userdata) {
                 <?php echo $userdata['nama'] ?? 'User'; ?>
             </div>
         </div>
-        <li><a href="aduan_user.php" class="nav-btn nav-btn-primary"><i class="fas fa-plus-circle"></i> Mohon Aduan Aset</a></li>
         <li><a href="index.php" class="nav-btn nav-btn-danger"><i class="fas fa-sign-out-alt"></i> Log Keluar</a></li>
     </ul>
 </div>

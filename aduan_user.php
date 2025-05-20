@@ -250,7 +250,7 @@ $totalRows_akaun = mysqli_num_rows($akaun);
                 <i class="fas fa-arrow-left"></i> Kembali
             </a>
             <div class="d-flex align-items-center">
-                <img src="logo.png" alt="Logo" height="40" class="me-2">
+                <img src="img/logo.png" alt="Logo" height="40" class="me-2">
                 <h1 class="mb-0">SISTEM ADUAN KEROSAKAN ASET</h1>
             </div>
         </div>
