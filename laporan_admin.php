@@ -1,4 +1,5 @@
-<?php include 'header_print.php'?>
+<?php include ('header_print.php');?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css"/>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
     <title>Sistem Aduan Kerosakan Aset</title>
     <style>
         :root {
@@ -380,7 +386,7 @@
                 </div>
             </div>
 
-            <div class="btn-actions">
+            <div class="action-buttons">
                 <button onclick="exportToWord()" class="btn-export btn-word">
                     <i class="fas fa-file-word"></i> Export Word
                 </button>
@@ -392,7 +398,7 @@
             <div class="table-container">
                 <div class="table-responsive-sm">
                     <!-- Table -->
-                    <table class="table">
+                    <table id="aduanTable" class="table">
                         <thead>
                             <tr>
                                 <th>Bil.</th>
@@ -472,15 +478,29 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script>
-        function exportToWord() {
-            // Implement Word export functionality
-            alert('Exporting to Word...');
-        }
-        
-        function exportToExcel() {
-            // Implement Excel export functionality
-            alert('Exporting to Excel...');
-        }
+        $(document).ready(function () {
+            $('#aduanTable').DataTable({
+                responsive: true,
+                scrollX: true,
+                pageLength: 5,
+                lengthMenu: [5, 10, 25, 50],
+                language: {
+                    search: "Carian:",
+                    lengthMenu: "Papar _MENU_ rekod",
+                    info: "Memaparkan _START_ hingga _END_ daripada _TOTAL_ rekod",
+                    infoEmpty: "Tiada rekod untuk dipaparkan",
+                    infoFiltered: "(ditapis dari _MAX_ jumlah rekod)",
+                    zeroRecords: "Tiada rekod ditemui",
+                    paginate: {
+                        first: "Pertama",
+                        last: "Terakhir",
+                        next: "Seterusnya",
+                        previous: "Sebelumnya"
+                    }
+                }
+            });
+        });
+
     </script>
 </body>
 </html>
