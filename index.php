@@ -51,7 +51,9 @@
     .navbar-brand span {
       color: var(--light-text);
       font-weight: 600;
-      letter-spacing: 0.5px;
+      font-size: 25px;
+      letter-spacing: 1px;
+      margin-left: 10px;
       text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
     }
 
@@ -266,7 +268,7 @@
     /* Media queries for responsive design */
     @media (max-width: 991px) {
       .navbar-brand span {
-        font-size: 16px;
+        font-size: 10px;
       }
       
       .social-links {
@@ -278,7 +280,7 @@
       }
 
       .banner-text h1 {
-        font-size: 2.2rem;
+        font-size: 2rem;
       }
 
       .login-title {
@@ -292,7 +294,7 @@
       }
       
       .navbar-brand {
-        margin-bottom: 8px;
+        margin-bottom: 5px;
       }
       
       .social-links {
@@ -316,7 +318,7 @@
       }
       
       .boxes {
-        gap: 30px;
+        gap: 100px;
       }
 
       .login-title {
@@ -384,15 +386,15 @@
       }
       
       .box {
-        width: 90%;
-        height: 250px;
-        padding: 25px 15px;
+        width: 170px;
+        height: 200px;
+        padding: 1px;
       }
 
       .box img {
-        width: 90px;
-        height: 90px;
-        margin-bottom: 15px;
+        width: 80px;
+        height: 80px;
+        margin-bottom: 10px;
       }
 
       .box h3 {
@@ -414,7 +416,7 @@
     <div class="container">
       <a class="navbar-brand" href="#">
         <img src="img/305199717_985453492342369_1200662185772088661_n.png" alt="Logo" />
-        <span class="ms-3 fw-bold fs-5">Sistem Aduan Kerosakan Aset</span>
+        <span class="fw-bold">Sistem Aduan Kerosakan Aset</span>
       </a>
       <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -455,7 +457,7 @@
       </a>
       <a href="login_user.php" class="text-decoration-none">
         <div class="box">
-          <img src="img/user_9795143.png" alt="User">
+          <img src="img/login.png" alt="User">
           <h3>LOG MASUK</h3>
         </div> 
       </a>

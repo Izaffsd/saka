@@ -4,9 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
     <title>Login Sistem Aduan Kerosakan Asset</title>
 
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         :root {
             --primary-color: #3366CC;
             --secondary-color: #1E3A8A;
@@ -16,18 +23,86 @@
             --text-dark: #2d3748;
             --text-light: #ffffff;
             --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 10px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
         }
 
         body {
-            height: 100vh;
-            display: flex;
-            background-repeat: no-repeat;
-            background-size: cover;
-            justify-content: center;
-            align-items: center;
+            font-family: 'Poppins', Arial, sans-serif;
+            line-height: 1.6;
             background-color: var(--light-bg);
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+        }
+        
+        /* Navbar styles */
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 15px 0;
+            box-shadow: var(--shadow-md);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .navbar-brand img {
+            height: 50px;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+        }
+
+        .navbar-brand span {
+            color: var(--text-light);
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-left: 15px;
+            letter-spacing: 0.5px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar-nav {
+            list-style: none;
+            display: flex;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 20px;
+            background-color: rgba(255, 255, 255, 0.15);
+            color: var(--text-light);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: var(--transition);
+            border: none;
+        }
+
+        .back-button i {
+            margin-right: 8px;
+        }
+
+        .back-button:hover {
+            background-color: var(--accent-color);
+            color: var(--text-dark);
+            transform: translateY(-2px);
         }
 
         .login-container {
@@ -40,11 +115,11 @@
             overflow: hidden;
             flex-direction: column;
             margin: auto;
-            position: absolute;
-            top: 50%;
-            left: 50%;
+            margin-top: 20px;
+            /* position: absolute; */
+            /* top: 100px; */
+            /* left: 50%; */
             transform: translate(-50%, -50%);
-            border-top: 5px solid var(--primary-color);
         }
 
         .login-header {
@@ -203,6 +278,13 @@
             color: #9ca3af;
         }
 
+        .system-name {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
         /* Responsive design */
         @media (max-width: 576px) {
             .login-container {
@@ -210,10 +292,19 @@
                 max-width: none;
                 min-height: auto;
                 border-radius: 8px;
+                margin-bottom: 10px;
             }
             
             .login-form {
-                padding: 20px 15px;
+                padding: 20px;
+            }
+
+            .navbar-brand span {
+                display: none;
+            }
+
+            .navbar-brand img {
+                height: 40px;
             }
         }
         
@@ -232,34 +323,40 @@
                 border-radius: 12px;
             }
         }
-        
-        #kembali {
-            align-self: flex-start;
-            margin-bottom: 20px;
-            border: 1px solid var(--danger-color);
-            color: var(--danger-color);
-            padding: 7px 15px;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            background-color: transparent;
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        #kembali:hover {
-            background-color: var(--danger-color);
-            color: white;
-        }
-
-        .system-name {
-            font-size: 1.1rem;
-            margin-bottom: 5px;
-            color: var(--accent-color);
-            font-weight: 600;
+        .login-container {
+            animation: fadeInUp 0.5s ease-out forwards;
         }
     </style>
 </head>
 <body>
+    <nav class="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="index.php">
+                <img src="img/305199717_985453492342369_1200662185772088661_n.png" alt="Logo" loading="lazy">
+                <span class="fw-bold">Sistem Aduan Kerosakan Aset</span>
+            </a>
+            <ul class="navbar-nav">
+                <li>
+                    <a class="back-button" href="index.php">
+                        <i class="fas fa-arrow-left"></i> Kembali
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
     
     <div class="login-container">
         <div class="login-header">
@@ -269,7 +366,6 @@
         </div>
 
         <div class="login-form">
-            <a href="index.php" class="btn" id="kembali"><i class="fas fa-arrow-left"></i> Kembali</a>
             <h2>Log Masuk</h2>
             <form action="loginsession.php" method="post">
                 <div class="form-group">
@@ -293,7 +389,12 @@
         </div>
     </div>
 
-    <!-- Adding Font Awesome for icons -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" crossorigin="anonymous"></script>
+    <!-- Add Poppins font -->
+    <script>
+        const fontLink = document.createElement('link');
+        fontLink.rel = 'stylesheet';
+        fontLink.href = 'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap';
+        document.head.appendChild(fontLink);
+    </script>
 </body>
 </html>
