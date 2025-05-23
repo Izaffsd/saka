@@ -250,7 +250,7 @@ $totalRows_akaun = mysqli_num_rows($akaun);
                 <i class="fas fa-arrow-left"></i> Kembali
             </a>
             <div class="d-flex align-items-center">
-                <img src="logo.png" alt="Logo" height="40" class="me-2">
+                <img src="img/logo.png" alt="Logo" height="40" class="me-2">
                 <h1 class="mb-0">SISTEM ADUAN KEROSAKAN ASET</h1>
             </div>
         </div>
@@ -352,11 +352,11 @@ $totalRows_akaun = mysqli_num_rows($akaun);
             </div>
 
             <div class="action-buttons mt-4 mb-3">
-                <button type="submit" name="aduanuser" class="btn btn-primary">
-                    <i class="fas fa-paper-plane me-2"></i>Hantar Aduan
-                </button>
                 <button type="reset" class="btn btn-danger">
                     <i class="fas fa-times me-2"></i>Reset
+                </button>
+                <button type="submit" name="aduanuser" class="btn btn-primary">
+                    <i class="fas fa-paper-plane me-2"></i>Hantar Aduan
                 </button>
             </div>
         </form>

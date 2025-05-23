@@ -284,9 +284,7 @@
         </div>
 
         <div class="login-form">
-            <a href="index.php" class="btn-outline-danger">
-                <i class="fas fa-arrow-left me-2"></i> Kembali
-            </a>
+            
             
             <div class="system-logo">
                 <img src="img/logo.png" alt="Logo Sistem">
