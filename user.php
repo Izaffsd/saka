@@ -70,6 +70,7 @@ if (!$userdata) {
             align-items: center;
             text-decoration: none;
             color: var(--text-light);
+            flex: 1;
         }
 
         .navbar-brand img {
@@ -84,7 +85,7 @@ if (!$userdata) {
             font-weight: 600;
         }
 
-        .navbar ul {
+        .navbar-nav {
             list-style-type: none;
             padding: 0;
             margin: 0;
@@ -422,11 +423,17 @@ if (!$userdata) {
             border: none;
             cursor: pointer;
             margin-bottom: 25px;
+            text-decoration: none;
         }
 
         .action-button:hover {
             background-color: var(--secondary-color);
             transform: translateY(-2px);
+            color: white;
+        }
+
+        .button-container {
+            text-align: center;
         }
 
         /* Footer */
@@ -442,30 +449,165 @@ if (!$userdata) {
         @media (max-width: 768px) {
             .navbar {
                 flex-direction: column;
-                padding: 10px;
+                padding: 15px 10px;
+                text-align: center;
             }
             
             .navbar-brand {
-                margin-bottom: 10px;
+                margin-bottom: 15px;
+                justify-content: center;
+                text-align: center;
             }
             
-            .navbar ul {
+            .navbar-brand h4 {
+                font-size: 1rem;
+                text-align: center;
+                white-space: normal;
+                line-height: 1.3;
+            }
+            
+            .navbar-nav {
                 width: 100%;
                 justify-content: center;
                 flex-wrap: wrap;
+                gap: 10px;
             }
             
             .user-profile {
                 margin-right: 0;
                 margin-bottom: 10px;
+                order: -1;
+            }
+            
+            .nav-btn {
+                font-size: 0.85rem;
+                padding: 6px 12px;
             }
             
             .container-dashboard {
                 padding: 15px;
+                margin: 15px auto;
+            }
+            
+            .page-title {
+                font-size: 1.4rem;
+                margin-bottom: 20px;
+            }
+            
+            .user-email {
+                font-size: 0.9rem;
+                margin-bottom: 20px;
             }
             
             .stats-container {
                 grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .stat-card {
+                padding: 15px;
+            }
+            
+            .stat-card .icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+                margin-right: 12px;
+            }
+            
+            .stat-card .stat-value {
+                font-size: 1.3rem;
+            }
+            
+            .stat-card .stat-title {
+                font-size: 0.8rem;
+            }
+            
+            .action-button {
+                width: 100%;
+                max-width: 250px;
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .button-container {
+                margin-bottom: 20px;
+            }
+            
+            /* Mobile table adjustments */
+            .table-container {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .custom-table {
+                min-width: 800px;
+            }
+            
+            .custom-table thead th,
+            .custom-table tbody td {
+                padding: 8px 10px;
+                font-size: 0.85rem;
+            }
+            
+            .expandable-cell .full-content {
+                width: 280px;
+                padding: 12px;
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 10px 8px;
+            }
+            
+            .navbar-brand img {
+                height: 35px;
+                margin-right: 10px;
+            }
+            
+            .navbar-brand h4 {
+                font-size: 0.9rem;
+            }
+            
+            .container-dashboard {
+                margin: 10px auto;
+                padding: 12px;
+            }
+            
+            .page-title {
+                font-size: 1.2rem;
+            }
+            
+            .user-email {
+                font-size: 0.8rem;
+            }
+            
+            .stat-card {
+                padding: 12px;
+            }
+            
+            .stat-card .icon {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+                margin-right: 10px;
+            }
+            
+            .stat-card .stat-value {
+                font-size: 1.1rem;
+            }
+            
+            .action-button {
+                padding: 10px 15px;
+                font-size: 0.85rem;
+            }
+            
+            .custom-table thead th,
+            .custom-table tbody td {
+                padding: 6px 8px;
+                font-size: 0.8rem;
             }
         }
     </style>
@@ -477,7 +619,7 @@ if (!$userdata) {
         <img src="img/305199717_985453492342369_1200662185772088661_n.png" height="40" alt="Sistem Aduan Kerosakan Aset" />
         <h4><b>SISTEM ADUAN KEROSAKAN ASET (SAKA)</b></h4>
     </a>
-    <ul>
+    <ul class="navbar-nav">
         <div class="user-profile">
             <div class="avatar">
                 <?php echo substr($userdata['nama'] ?? 'User', 0, 1); ?>
@@ -545,9 +687,11 @@ if (!$userdata) {
     <h2 class="page-title">Senarai Aduan Kerosakan Aset</h2>
     <div class="user-email"><?php echo($userdata['emel']); ?></div>
     
-    <a href="aduan_user.php" class="action-button">
-        <i class="fas fa-plus-circle"></i> Tambah Aduan Baru
-    </a>
+    <div class="button-container">
+        <a href="aduan_user.php" class="action-button">
+            <i class="fas fa-plus-circle"></i> Borang Aduan
+        </a>
+    </div>
 
     <div class="table-container">
         <table id="aduanTable" class="custom-table table-bordered display nowrap" style="width:100%">

@@ -352,11 +352,11 @@ $totalRows_akaun = mysqli_num_rows($akaun);
             </div>
 
             <div class="action-buttons mt-4 mb-3">
-                <button type="submit" name="aduanuser" class="btn btn-primary">
-                    <i class="fas fa-paper-plane me-2"></i>Hantar Aduan
-                </button>
                 <button type="reset" class="btn btn-danger">
                     <i class="fas fa-times me-2"></i>Reset
+                </button>
+                <button type="submit" name="aduanuser" class="btn btn-primary">
+                    <i class="fas fa-paper-plane me-2"></i>Hantar Aduan
                 </button>
             </div>
         </form>
