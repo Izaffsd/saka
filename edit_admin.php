@@ -448,7 +448,6 @@
                         <div class="form-group has-icon">
                             <label class="form-label">Nama dan Jawatan</label>
                             <input type="text" class="form-control" name="nama" placeholder="Contoh: Ahmad bin Ali - Pegawai ICT" value="Ahmad bin Ali - Pegawai ICT" required>
-                            <i class="fas fa-user input-icon"></i>
                         </div>
 
                         <div class="form-group">
@@ -491,7 +490,6 @@
                         <div class="form-group has-icon">
                             <label class="form-label">Nombor Siri Pendaftaran</label>
                             <input type="text" class="form-control" name="no_siri" placeholder="Contoh: ICT-2024-001" value="ICT-2024-001">
-                            <i class="fas fa-hashtag input-icon"></i>
                         </div>
 
                         <div class="form-group">
@@ -512,7 +510,6 @@
                         <div class="form-group has-icon">
                             <label class="form-label">Tarikh Kerosakan</label>
                             <input type="date" class="form-control" name="tarikh_rosak" value="2024-01-15" required>
-                            <i class="fas fa-calendar input-icon"></i>
                         </div>
                     </div>
                 </div>
@@ -526,7 +523,6 @@
                         <div class="form-group has-icon">
                             <label class="form-label">Pengguna Terakhir</label>
                             <input type="text" class="form-control" name="userterakhir" placeholder="Nama pengguna terakhir" value="Siti Aminah" required>
-                            <i class="fas fa-user-clock input-icon"></i>
                         </div>
 
                         <div class="form-group full-width">
