@@ -322,10 +322,10 @@ if (mysqli_query($conn, $sql)) {  echo "
 
         /* Responsive styles */
         @media (max-width: 768px) {
-            .form-container {
-                padding: 30px 25px;
-                margin: 0 15px;
-            }
+            /* .form-container {
+                padding: 10px;
+                margin: 15px;
+            } */
 
             .button-group {
                 flex-direction: column-reverse;
